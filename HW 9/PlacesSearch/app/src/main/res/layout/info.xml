@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+    <LinearLayout
+        android:id="@+id/address_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/address_label"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="3dp"
+            android:padding="3dip"
+            android:text="Address" />
+
+        <TextView
+            android:id="@+id/address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="left"
+            android:padding="3dip" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/phoneno_wrapper"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="5dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/phoneno_label"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="3dp"
+            android:padding="3dip"
+            android:text="Phone Number" />
+
+
+        <TextView
+            android:id="@+id/phoneno"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:autoLink="phone"
+            android:padding="3dp"
+            android:text="TextView" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/price_wrapper"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="5dp">
+
+        <TextView
+            android:id="@+id/price_label"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:padding="3dip"
+            android:text="Price Level" />
+
+        <TextView
+            android:id="@+id/price"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:padding="3dip" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/rating_wrapper"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="5dp">
+
+        <TextView
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="3dp"
+            android:padding="3dip"
+            android:text="Rating" />
+
+        <android.support.v7.widget.AppCompatRatingBar
+            android:id="@+id/info_rating_bar"
+            style="?android:attr/ratingBarStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:isIndicator="true"
+            android:max="5"
+            android:stepSize="0.1" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/google_page_wrapper"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="5dp">
+
+        <TextView
+            android:id="@+id/google_page_label"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:padding="3dip"
+            android:text="Google Page" />
+
+        <TextView
+            android:id="@+id/google_page"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:autoLink="web"
+            android:gravity="left"
+            android:padding="3dip"
+            android:scrollHorizontally="false"
+            android:text="https://maps.google.com/?cid=15031047847736506223" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/website_wrapper"
+        android:paddingTop="5dp">
+
+        <TextView
+            android:id="@+id/website_label"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:padding="3dip"
+            android:text="Website" />
+
+        <TextView
+            android:id="@+id/website"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="3dip"
+            android:autoLink="web" />
+    </LinearLayout>
+
+</LinearLayout>

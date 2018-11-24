@@ -1,0 +1,159 @@
+<!--
+	@Author Utkarsh Gera
+	@Homework Assignment 3 Web Technologies
+
+	@15 Inch Laptop used for development.
+-->
+<html>
+	<head>
+		<title>Homework 4</title>
+		<meta content="text/html;charset=utf-8" http-equiv="Content-Type"/>
+		<meta content="utf-8" http-equiv="encoding"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+		<style type="text/css">
+			div {
+				margin-bottom: 20px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<form style="text-align: center; margin-top: 120px;" id="jsonForm">
+			<div style="font-weight:bold;">Enter URL for Trucking List JSON file</div>
+			<div>
+				<input type="text" id="file"/>
+			</div>
+			<input type="submit" value="Submit Query"/>
+		</form>
+
+		<script type="text/javascript">
+			(function(){
+				var jsonContent;
+				
+				document.getElementById("jsonForm").onsubmit = function() {
+					file_path = document.getElementById("file").value;
+
+					if(file_path.length == 0) {
+						alert("File name missing");
+					} else{
+						var jsonData = fetchData(file_path);
+
+						if(jsonData!=null){
+							var code = "<style type='text/css'> \
+										table{border: 2px solid #ccc; box-shadow: 1px 1px; padding: 2px; width:100%; max-width:1500px;}\
+							 			thead tr td {text-align: center;font-weight: bold; padding: 5px;}\
+							 			td {margin: 1px; box-shadow: inset 2px 2px; border: 1px solid #ccc;}\
+							 			ul li:first-child {font-weight: bolder;}\
+							 			</style><table><thead><tr>";
+
+							if(jsonData.hasOwnProperty('Mainline') && jsonData['Mainline'].hasOwnProperty('Table') 
+								&& jsonData['Mainline']['Table'].hasOwnProperty('Header') && jsonData['Mainline']['Table']['Header'].hasOwnProperty('Data')) {
+
+								for(index in jsonData["Mainline"]['Table']['Header']['Data']) {
+									if(jsonData["Mainline"]['Table']['Header']['Data'][index]==null){
+										jsonData["Mainline"]['Table']['Header']['Data'][index] = "";
+									}
+
+									code += "<td>" + jsonData["Mainline"]['Table']['Header']['Data'][index] + "</td>";
+								}
+
+								code += "</tr></thead><tbody>";
+
+								if(!(jsonData['Mainline']['Table'].hasOwnProperty('Row')) || jsonData['Mainline']['Table']['Row'].length==0){
+									// Update as per piazza post @160 specific message - 'No trucking companies'
+									alert("No trucking companies.");
+									return false;
+								}
+								
+								for(index in jsonData['Mainline']['Table']['Row']) {
+									row = jsonData['Mainline']['Table']['Row'][index];
+
+									if(row['Company']==null){
+										row['Company'] = "";
+									}
+									code += "<tr><td style='min-width: 120px; width: 10%;'>" + row['Company'] + "</td>";
+
+
+									if(row['Services']==null){
+										row['Services'] = "";
+									}
+									code += "<td style='min-width: 120px; width:10%;'>" + row['Services'] + "</td>";
+
+									code += "<td style='min-width: 220px; width:18%;'><ul>"
+
+									for(hub_index in row['Hubs']['Hub']) {
+										if(row['Hubs']['Hub'][hub_index]==null){
+											row['Hubs']['Hub'][hub_index] = "";
+										}
+										code += "<li>" + row['Hubs']['Hub'][hub_index] + "</li>";
+									} 
+
+									code += "</ul>";
+
+									if(row['Revenue']==null){
+										row['Revenue'] = "";
+									}
+									code += "<td style='min-width:100px; width:4%;'>" + row['Revenue'] + "</td>";									
+
+									if(row['HomePage']==null){
+										row['HomePage'] = "";
+									}
+									code += "<td style='min-width:180px; width:15%;'><a href='" + row['HomePage'] + "'>" + row['HomePage'] + "</a></td>";
+
+									if(row['Logo']==null){
+										row['Logo'] = "";
+									}
+									code += "<td style='padding: 40px 20px; text-align:center; min-width: 460px; width: 43%;'> <img src='" + row['Logo'] + "' style='max-width:500px; width:100%;'></td></tr>";
+								}
+
+								code += "</tbody></table>";
+
+								var new_window = window.open("about:blank","newWindow","scrollbars=1");
+
+								new_window.document.write(code);
+
+								setTimeout(function(){
+									new_window.document.title = 'Top Trucking Companies';
+								},0);
+								
+								new_window.document.close();
+							} else {
+								alert("JSON Data format mismatch.");
+							}
+						}
+					}
+
+					return false;
+				};
+
+				function fetchData(file_path){
+					var xmlhttp=new XMLHttpRequest(); 
+					xmlhttp.open("GET", file_path, false); 
+					
+					try {
+						//Call the file 
+						xmlhttp.send();                
+					} catch(err) {
+						alert("File name not found");
+						return null;
+					}
+
+					if(xmlhttp.status==200){
+						try {
+							return JSON.parse(xmlhttp.responseText);
+						} catch(err) {
+							alert("Invalid JSON present");
+						}
+					} else if(xmlhttp.status=404){
+						alert("File name not found");
+					} else {
+						alert("Unknown error with status : " + xmlhttp.status);
+					}
+					return null;
+				}
+
+			})();
+		</script>
+	</body>
+</html>

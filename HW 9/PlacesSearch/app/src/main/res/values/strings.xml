@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Places Search</string>
+    <string name="tab_text_1">Search</string>
+    <string name="tab_text_2">Favorites</string>
+    <string name="keyword">Keyword</string>
+    <string name="keyword_placeholder">Enter Keyword</string>
+    <string name="mandatory_warning">Please enter mandatory field</string>
+    <string name="category_text">Category</string>
+    <string name="distance_text">Distance (in miles)</string>
+    <string name="from_text">From</string>
+    <string name="curr_text">Current location</string>
+    <string name="other_text">Other. Specify Location</string>
+    <string name="search">Search</string>
+    <string name="Clear">Clear</string>
+    <string name="errorMessage">Please fix all fields with errors</string>
+</resources>
